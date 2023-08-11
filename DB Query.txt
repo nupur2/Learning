@@ -1,0 +1,116 @@
+Indexes are used to retrieve data from the database more quickly than otherwise. 
+
+The users cannot see the indexes, they are just used to speed up searches/queries. 
+
+Note: Updating a table with indexes takes more time than updating a table without (because the indexes also need an update).
+
+
+CREATE INDEX index_name
+ON table_name (column1, column2, ...);
+
+CREATE UNIQUE INDEX index_name
+ON table_name (column1, column2, ...);
+
+
+DROP INDEX index_name ON table_name;
+
+
+
+Group by , having question , join question releated questions
+WHERE : filters individual records. GROUP BY : groups the records based on the column(s) specified. HAVING : filters the groups defined by GROUP BY . ORDER BY : sorts the output records by the column(s) 
+N th max salary in emp table
+select * from Employee ORDER BY `sal` 
+DESC limit N-1 ,1;
+
+
+6. Basic SQL query, find number of employees in each department.
+SELECT emp_dept, COUNT(*)
+  FROM emp_details
+  GROUP BY emp_dept;
+7. How to tune SQL query for better performance.
+1) Use Proper Join Instead Of Subqueries
+2)Use Exists Instead Of Sub Query ...If sometimes need to use subquery at that time first use Exist() function of the SQL server only when the subquery returns large data. In this case, Exist() function works faster than In because Exist() function returns a boolean value based on the query.
+3)Use “Where” Instead Of “Having” A Clause
+4)Apply Index On Necessary Columns
+
+a) Indexes are used to retrieve data from the database more quickly than otherwise. The users cannot see the indexes, they are just used to speed up searches/queries. Note: Updating a table with indexes takes more time than updating a table without (because the indexes also need an update).
+
+b) Additional Disk Space
+5)For User-Defined Stored Procedures Avoid Prefixes Like “Sp_”
+6)Avoid Negative Search
+7)Apply Valid Datatype On The Column
+
+8. What are SQL hints and how to use them.
+Hints are instructions that you place within a SQL statement that tell the data source query optimizer the most efficient way to execute the statement.
+Using the Administration Tool, you can add hints to a repository, in both online and offline modes, to optimize the performance of queries. When you add a hint to the repository, you associate it with Physical layer objects. When the object associated with the hint is queried, the Oracle BI Server inserts the hint into the SQL statement.
+About the Index Hint
+The Index hint explains how the optimizer scans a specified index rather than a table.
+
+If queries against the ORDER_ITEMS table are slow, you can review the execution plan of the query optimizer. If the FAST_INDEX was not used, you can create an Index hint to force the optimizer to scan the FAST_INDEX rather than the ORDER_ITEMS table. The syntax for the Index hint is as follows:
+
+index(table_name,index_name)
+
+To add this hint to the repository, open the Physical Table dialog in the Administration Tool, and type the following text in the Hint field:
+
+index(ORDER_ITEMS, FAST_INDEX)
+About the Leading Hint
+The Leading hint forces the optimizer to build the join order of a query with a specified table.
+
+The syntax for the Leading hint is leading(table_name). If you were creating a foreign key join between the Products table and the Sales Fact table and wanted to force the optimizer to begin the join with the Products table, you would go to the Physical Foreign Key dialog in the Administration Tool and type the following text in the Hint field:
+
+leading(Products)
+
+
+- Query to find employees having salary more than average salary
+SELECT * FROM employees 
+WHERE salary > 
+ALL(SELECT avg(salary)FROM employees GROUP BY department_id);
+
+13) You have student table 
+id   age   name
+----------------------
+1    19    91
+2    20    90
+3    20    87
+4    21    71
+5    19    98
+6    100   50
+
+
+
+find the 3rd highest score 
+
+select score from student order by desc limit 3, 1 ;
+
+Q23. Write a query to retrieve the list of employees working in the same department.
+
+Select DISTINCT E.EmpID, E.EmpFname, E.Department 
+FROM EmployeeInfo E, Employee E1 
+WHERE E.Department = E1.Department AND E.EmpID != E1.EmpID;
+
+
+Q28. Write a query to retrieve Departments who have less than 2 employees working in it.
+
+SELECT DEPARTMENT, COUNT(EmpID) as 'EmpNo' FROM EmployeeInfo GROUP BY DEPARTMENT HAVING COUNT(EmpD) < 2;
+
+
+Write a query to retrieve EmpPostion along with total salaries paid for each of them.
+
+SELECT EmpPosition, SUM(Salary) from EmployeePosition GROUP BY EmpPosition;
+
+Tables :- 
+----------------------------------------------------------------------------------------------
+EmpID	EmpFname	EmpLname	Department	Project	Address	          DOB	       Gender
+1	    Sanjay	    Mehra	    HR	        P1	    Hyderabad(HYD)	  01-12-1976	M
+2	    Ananya	    Mishra	    Admin	    P2	    Delhi(DEL)	      02-05-1968	F
+3	    Rohan	    Diwan	    Account	    P3	    Mumbai(BOM)	      01-01-1980	M
+4	    Sonia	    Kulkarni	HR	        P1	    Hyderabad(HYD)	  02-05-1992	F
+5	    Ankit	    Kapoor	    Admin	    P2	    Delhi(DEL)	      03-07-1994	M
+
+
+EmpID	EmpPosition	DateOfJoining	Salary
+1	    Manager  	01-05-2019	    500000
+2	    Executive	02-05-2019	    75000
+3	    Manager	    01-05-2019	    90000
+2	    Lead	    02-05-2019	    85000
+1	    Executive	01-05-2019	    300000

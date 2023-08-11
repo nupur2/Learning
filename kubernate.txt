@@ -1,0 +1,88 @@
+Kubernate -- continer orchestration 
+
+1) out ulitimate goal is to dEPLOY ARE multiple application in form of continer on set of mashines which are configured as worker node in cluster
+
+
+2)Kubernative not deploy continer directly on worker node. the continer are encapuslated into kubernat object known as pod. a pod is single 
+insatcne of application. its smallest unit in kubernate.
+
+3) node can have multiple pod, but two -3 same insatnce cant be in same pod. you can incrase node if pod is incraesed.
+
+4) pod and application have 1 to 1 mapping 
+
+5) simple pod can have multiple continer of diff type .
+-----------------------------------------------------------------------------------------------------------------------
+
+Autmatically fix the isse in conatiner
+
+1) its open source continer orchestration tool
+2)developed by google
+3)helps you manage containarized applications in different Env
+
+The need of conatiner orchestration tool
+
+1) trend from monolith to microservices
+2)Increased usage of conatiner
+3)demand of proper manage 100th of conatiner 
+
+
+What offers orchestration tool
+-------------------------------------
+1)High avaibility no downtime
+2)Scalabilty or high perfomrmance
+3)Disaster recovery - backup and restore
+
+
+Kubernate architecure 
+----------------------------------------
+1 master node connected to worker node  (each have kubelet prcoess - it help cluster to talk to each other)
+2)worker node where actual conatiner runnings
+
+Master will have  (
+--------------------------
+1)app server - UI ,API,CLI (entry point to kubernate cluster)
+
+2)controller manager -keep check and have Overview of cluster , somthing need to repair
+3)scheduler - ensure pods placement ( which worker will resposible to run the conatiner )
+4)etcd -> kubernate backing key value store 
+-------------------------------------------------------------------------------------------------
+pod 
+
+---------------------------------------------------
+kubernate components
+
+Node and POD
+-----------------------------------------------------------------------------------------------------------------------
+
+Kubctl run nginx --image  nginx
+
+kubctl get pods -- > it will get the info of running pod
+
+kubctl describe pod nginx ----> detailed info
+
+kubctl get pods -o wide -- > it will get the info of running pod
+--------------------------------------------------------
+
+How to run the pod ?
+
+YML in kubaernate
+prod-defination.yml 
+
+apiVersion: v1
+kind: Pod  (type of object)
+metadata:  (its the data about the object)
+  name: myapp-prod
+  labels: 
+      app: myapp
+spec:
+  containers:
+      name: nginx-container
+      image: nginx
+
+kubctl create -f prod-defination.yml
+--------------------------------------------------------------------
+
+
+
+
+

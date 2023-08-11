@@ -1,0 +1,64 @@
+List<Integer> list =  1345644577
+remove duplicate = 4-5 -7
+print the duplicate once  = 457
+print the frequency of duplicate =
+
+
+
+
+
+list.strem().filter(
+
+
+
+this will help in count and check the frequncey
+
+Map<Intger, integer> map = new HashMAp<>();
+
+for(int i= o ;i < list.size ; i++){
+int num =list.get(i) ;
+
+if(null != map &&  map.conatinsKey(num ){
+//exist add the 
+map.put(num  , map.getValue(num) +1 )
+
+}else{
+
+//add and initialize - 1 
+map.put(num  , 1)
+}
+}
+
+822908Finland&
+
+
+
+
+674445----- log the details 
+
+
+.................................
+
+
+-------------------------------
+
+remove duplicate 
+
+Set<Intger> set = new HashSet<>();{
+for(int i= o ;i < list.size ; i++){
+set.add(list.get(i);
+}
+}
+
+
+list.strem().collect(collecter.toset(Intger:: toInt) {
+
+}
+
+
+
+-----------------------------------
+
+he problem is about inconsistency of your equals and compareTo methods. The compareTo must return 0 if and only if equals returns true, as far as I remember TreeMap (or TreeSet) does not invoke the equals method, it just uses compareTo and its result to indicate duplicate keys.
+
+
